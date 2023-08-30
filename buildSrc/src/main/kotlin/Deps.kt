@@ -1,5 +1,11 @@
 object Deps {
 
+    const val TYPE_ARG = "String"
+    const val M_KEY = "API_KEY"
+    const val M_TOKEN = "API_TOKEN"
+    const val RELEASE = "release"
+    const val DEBUG = "debug"
+
     //Core Section
     const val androidxActivity = "androidx.activity:activity-compose:${Versions.androidxActivityVersion}"
     const val androidCoreX = "androidx.core:core-ktx:${Versions.androidCoreXVersion}"
@@ -11,8 +17,23 @@ object Deps {
     const val composeUi = "androidx.compose.ui:ui"
     const val composeUiToolingPreview = "androidx.compose.ui:ui-tooling-preview"
 
+    const val compoaseNavTest = "androidx.navigation:navigation-testing:${Versions.composeNavTestVersion}"
+    const val composeNavigation =  "androidx.navigation:navigation-compose:${Versions.composeNavVersion}"
+    const val composeAnimatioNavigation = "com.google.accompanist:accompanist-navigation-animation:${Versions.composeAnimationNavVersion}"
+
+
+    // K O I N
+    const val koinCompose = "io.insert-koin:koin-androidx-compose:${Versions.koinComposeVersion}"
+
+    // I N T E R C E P T O R
+    const val interceptor = "com.squareup.okhttp3:logging-interceptor:${Versions.interceptorVersion}"
+
     //Material Section
     const val androidxMaterial3 = "androidx.compose.material3:material3"
+
+    // R E T R O F I T
+    const val retrofit = "com.squareup.retrofit2:retrofit:${Versions.retrofitVersion}"
+    const val retrofitGson = "com.squareup.retrofit2:converter-gson:${Versions.retrofitVersion}"
 
     // S P L A S H   S C R E E N
     const val splashScreen = "androidx.core:core-splashscreen:${Versions.splashScreenVersion}"
