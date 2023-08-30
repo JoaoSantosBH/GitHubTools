@@ -1,0 +1,1 @@
+/Users/joaosantos/AndroidStudioProjects/provas/GitHubTools/buildSrc/build/classes/kotlin/main/Deps.class:/Users/joaosantos/AndroidStudioProjects/provas/GitHubTools/buildSrc/build/classes/kotlin/main/Versions.class
