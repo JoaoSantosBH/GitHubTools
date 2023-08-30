@@ -14,6 +14,9 @@ object Deps {
     //Material Section
     const val androidxMaterial3 = "androidx.compose.material3:material3"
 
+    // S P L A S H   S C R E E N
+    const val splashScreen = "androidx.core:core-splashscreen:${Versions.splashScreenVersion}"
+
     // Tests Section
     const val junit = "junit:junit:${Versions.junitVersion}"
     const val junitTest = "androidx.test.ext:junit:${Versions.espressoVersion}"

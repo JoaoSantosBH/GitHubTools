@@ -66,6 +66,9 @@ dependencies {
     debugImplementation(Deps.composeUiTooling)
     debugImplementation(Deps.composeUiTest)
 
+    //Splash Screen
+    implementation(Deps.splashScreen)
+
     //Unit Tests Section
     testImplementation(Deps.junit)
 
