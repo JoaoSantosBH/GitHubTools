@@ -1,6 +1,6 @@
-package com.carrefour.desafio.android.githubtools.features.listusers.data.mapper
+package com.carrefour.desafio.android.githubtools.features.listusers.data.remote.mapper
 
-import com.carrefour.desafio.android.githubtools.features.listusers.data.model.ListUsersResponse
+import com.carrefour.desafio.android.githubtools.features.listusers.data.remote.model.ListUsersResponse
 import com.carrefour.desafio.android.githubtools.features.listusers.domain.ListUsersModel
 
 fun List<ListUsersResponse>.toDomain():List<ListUsersModel>  {

@@ -9,6 +9,7 @@ import com.carrefour.desafio.android.githubtools.features.home.servicess.HomeSer
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 
 class HomeViewModel(
@@ -16,7 +17,7 @@ class HomeViewModel(
 ) : ViewModel() {
     private val _uiState: MutableStateFlow<HomeUiStates> =
         MutableStateFlow(HomeUiStates.Empty)
-    var uiSTate: StateFlow<HomeUiStates> = _uiState
+    var uiSTate: StateFlow<HomeUiStates> = _uiState.asStateFlow()
     private val pendingActions = MutableSharedFlow<HomeEvent>()
 
     init {

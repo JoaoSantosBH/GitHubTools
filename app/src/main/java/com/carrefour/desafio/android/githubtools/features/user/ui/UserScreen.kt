@@ -1,6 +1,5 @@
-package com.carrefour.desafio.android.githubtools.features.listusers.ui
+package com.carrefour.desafio.android.githubtools.features.user.ui
 
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
@@ -11,17 +10,16 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
-import com.carrefour.desafio.android.githubtools.core.navigation.Screen
-import com.carrefour.desafio.android.githubtools.features.listusers.presentation.ListUsersEvent
-import com.carrefour.desafio.android.githubtools.features.listusers.presentation.ListUsersUiStates
+import com.carrefour.desafio.android.githubtools.features.user.presntation.UserEvents
+import com.carrefour.desafio.android.githubtools.features.user.presntation.UserUiStates
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun ListUsersScreen(
+fun UserScreen(
     modifier: Modifier,
     navController: NavHostController,
-    state: ListUsersUiStates,
-    onEvent: (ListUsersEvent) -> Unit,
+    state: UserUiStates,
+    onEvent: (UserEvents) -> Unit,
 ) {
 
     Scaffold(
@@ -30,26 +28,25 @@ fun ListUsersScreen(
         },
         content = {
             Column(modifier.fillMaxSize()) {
-                ListUsersLayout(it, modifier, navController, state, onEvent)
+                UserLayout(it, modifier, navController, state, onEvent)
             }
         }
     )
     LaunchedEffect(Unit) {
-        onEvent(ListUsersEvent.FetchListUsersDataEvent)
+        onEvent(UserEvents.FetchUserData)
     }
 
 }
 
 @Composable
-fun ListUsersLayout(
+fun UserLayout(
     paddingValues: PaddingValues,
     modifier: Modifier,
     navController: NavHostController,
-    state: ListUsersUiStates,
-    onEvent: (ListUsersEvent) -> Unit
+    state: UserUiStates,
+    onEvent: (UserEvents) -> Unit
 ) {
 
-    Column(modifier.fillMaxSize().clickable { navController.navigate(Screen.UserScreen.route) }) {
-        Text(text = "ListUsers SCREEN ")
-    }
+    Text(text = "User SCREEN ")
 }
+
