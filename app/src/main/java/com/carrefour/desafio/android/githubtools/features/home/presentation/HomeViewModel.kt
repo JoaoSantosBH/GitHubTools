@@ -4,10 +4,12 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.carrefour.desafio.android.githubtools.core.utils.util.RequestHandler
 import com.carrefour.desafio.android.githubtools.core.utils.util.then
+import com.carrefour.desafio.android.githubtools.features.home.data.remote.mapper.toDomain
 import com.carrefour.desafio.android.githubtools.features.home.servicess.HomeServices
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 
 class HomeViewModel(
@@ -15,7 +17,7 @@ class HomeViewModel(
 ) : ViewModel() {
     private val _uiState: MutableStateFlow<HomeUiStates> =
         MutableStateFlow(HomeUiStates.Empty)
-    var uiSTate: StateFlow<HomeUiStates> = _uiState
+    var uiSTate: StateFlow<HomeUiStates> = _uiState.asStateFlow()
     private val pendingActions = MutableSharedFlow<HomeEvent>()
 
     init {
@@ -42,12 +44,14 @@ class HomeViewModel(
     fun fetchHome(){
         viewModelScope.launch {
             RequestHandler.doRequest { services.fetchHomeData() }.then(
-                onSuccess = {
-                    it
+                onSuccess = { response ->
+                    response.toDomain()
                 },
-                onError = {},
+                onError = {
+                    //TODO
+                },
                 onFinish = {
-
+                    //TODO
                 }
             )
         }

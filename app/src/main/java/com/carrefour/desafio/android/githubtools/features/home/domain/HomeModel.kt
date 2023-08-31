@@ -5,21 +5,13 @@ import com.google.gson.annotations.SerializedName
 data class HomeModel(
 
     val authorizationsUrl: String? = null,
-
     val codeSearchUrl: String? = null,
-
     val commitSearchUrl: String? = null,
-
     val currentUserAuthorizationsHtmlUrl: String? = null,
-
     val currentUserRepositoriesUrl: String? = null,
-
     val currentUserUrl: String? = null,
-
     val emailsUrl: String? = null,
-
     val emojisUrl: String? = null,
-
     val eventsUrl: String? = null,
     val feedsUrl: String? = null,
     val followersUrl: String? = null,

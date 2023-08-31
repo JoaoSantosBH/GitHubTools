@@ -1,4 +1,4 @@
-package com.carrefour.desafio.android.githubtools.features.home.ui
+package com.carrefour.desafio.android.githubtools.features.listusers.ui
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
@@ -10,20 +10,19 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
-import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import com.carrefour.desafio.android.githubtools.core.navigation.Screen
-import com.carrefour.desafio.android.githubtools.features.home.presentation.HomeEvent
-import com.carrefour.desafio.android.githubtools.features.home.presentation.HomeUiStates
+import com.carrefour.desafio.android.githubtools.features.listusers.presentation.ListUsersEvent
+import com.carrefour.desafio.android.githubtools.features.listusers.presentation.ListUsersUiStates
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun HomeScreen(
+fun ListUsersScreen(
     modifier: Modifier,
     navController: NavHostController,
-    state: HomeUiStates,
-    onEvent: (HomeEvent) -> Unit,
-    ){
+    state: ListUsersUiStates,
+    onEvent: (ListUsersEvent) -> Unit,
+) {
 
     Scaffold(
         topBar = {
@@ -31,26 +30,26 @@ fun HomeScreen(
         },
         content = {
             Column(modifier.fillMaxSize()) {
-                HomeLayout(it, modifier, navController, state, onEvent)
+                ListUsersLayout(it, modifier, navController, state, onEvent)
             }
         }
     )
-    LaunchedEffect(Unit){
-        onEvent(HomeEvent.FetchHomeData)
+    LaunchedEffect(Unit) {
+        onEvent(ListUsersEvent.FetchListUsersDataEvent)
     }
 
 }
 
 @Composable
-fun HomeLayout(
+fun ListUsersLayout(
     paddingValues: PaddingValues,
     modifier: Modifier,
     navController: NavHostController,
-    state: HomeUiStates,
-    onEvent: (HomeEvent) -> Unit
+    state: ListUsersUiStates,
+    onEvent: (ListUsersEvent) -> Unit
 ) {
 
-    Column(modifier.fillMaxSize().clickable { navController.navigate(Screen.AllUsersList.route) }) {
-        Text(text = "HOME SCREEN ")
+    Column(modifier.fillMaxSize().clickable { navController.navigate(Screen.UserScreen.route) }) {
+        Text(text = "ListUsers SCREEN ")
     }
 }
