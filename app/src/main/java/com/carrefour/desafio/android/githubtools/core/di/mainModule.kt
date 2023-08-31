@@ -12,7 +12,7 @@ import org.koin.dsl.module
 
 val mainModule = module {
 
-    single { HttpInterceptor(get()) }
+    single { HttpInterceptor() }
     single { provideHomeServices(get()) }
     single { provideCache(androidApplication()) }
     single { provideOkHttpClient( get(), androidContext(), get()) }
