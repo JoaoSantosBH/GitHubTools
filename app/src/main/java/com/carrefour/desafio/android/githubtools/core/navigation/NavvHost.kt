@@ -14,11 +14,15 @@ import com.carrefour.desafio.android.githubtools.features.home.ui.HomeScreen
 import com.carrefour.desafio.android.githubtools.features.listusers.presentation.ListUsersUiStates
 import com.carrefour.desafio.android.githubtools.features.listusers.presentation.ListUsersViewModel
 import com.carrefour.desafio.android.githubtools.features.listusers.ui.ListUsersScreen
+import com.carrefour.desafio.android.githubtools.features.repo.presentation.RepoUiState
+import com.carrefour.desafio.android.githubtools.features.repo.presentation.UserRepoViewModel
+import com.carrefour.desafio.android.githubtools.features.repo.ui.ReposScreen
 import com.carrefour.desafio.android.githubtools.features.user.presntation.UserUiStates
 import com.carrefour.desafio.android.githubtools.features.user.presntation.UserViewModel
 import com.carrefour.desafio.android.githubtools.features.user.ui.UserScreen
 import com.google.accompanist.navigation.animation.AnimatedNavHost
 import com.google.accompanist.navigation.animation.composable
+import kotlinx.coroutines.flow.collectIndexed
 import org.koin.androidx.compose.getViewModel
 
 
@@ -36,6 +40,7 @@ internal fun AppNavigation(
         navigateToHome(navController, modifier)
         navigateToAllUsersSccreen(navController, modifier)
         navigateToUser(navController, modifier)
+        navigateToUserRepos(navController, modifier)
     }
 }
 
@@ -88,6 +93,18 @@ fun NavGraphBuilder.navigateToUser(
             state = uiState,
             onEvent = viewModel::onEvent
         )
+    }
+}
+@OptIn(ExperimentalAnimationApi::class)
+fun NavGraphBuilder.navigateToUserRepos(
+    navController: NavHostController,
+    modifier: Modifier
+) {
+    composable(route = Screen.UserReposScreen.route){
+            val viewModel: UserRepoViewModel = getViewModel()
+        val uiState by rememberFlowWithLifecycle(viewModel.uiState)
+            .collectAsState(initial = RepoUiState.Empty)
+        ReposScreen(modifier = modifier, navController = navController, state = uiState, onEvent = viewModel::onEvent )
     }
 }
 

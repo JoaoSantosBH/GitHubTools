@@ -4,6 +4,7 @@ import android.app.Application
 import com.carrefour.desafio.android.githubtools.core.di.mainModule
 import com.carrefour.desafio.android.githubtools.features.home.di.homeModule
 import com.carrefour.desafio.android.githubtools.features.listusers.di.listUsersModule
+import com.carrefour.desafio.android.githubtools.features.repo.di.moduleRepos
 import com.carrefour.desafio.android.githubtools.features.user.di.userModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
@@ -18,8 +19,11 @@ class CustomApp : Application() {
 
     private fun startKoin() {
         val modules = mutableListOf(
-            mainModule,homeModule, listUsersModule, userModule
-
+            mainModule,
+            homeModule,
+            listUsersModule,
+            userModule,
+            moduleRepos
         )
         GlobalContext.startKoin {
             androidLogger()

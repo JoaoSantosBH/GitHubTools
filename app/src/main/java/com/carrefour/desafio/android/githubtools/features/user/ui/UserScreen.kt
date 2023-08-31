@@ -1,5 +1,6 @@
 package com.carrefour.desafio.android.githubtools.features.user.ui
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
@@ -10,6 +11,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
+import com.carrefour.desafio.android.githubtools.core.navigation.Screen
 import com.carrefour.desafio.android.githubtools.features.user.presntation.UserEvents
 import com.carrefour.desafio.android.githubtools.features.user.presntation.UserUiStates
 
@@ -47,6 +49,8 @@ fun UserLayout(
     onEvent: (UserEvents) -> Unit
 ) {
 
-    Text(text = "User SCREEN ")
+    Column(modifier.clickable { navController.navigate(Screen.UserReposScreen.route) }) {
+        Text(text = "User SCREEN ")
+    }
 }
 
