@@ -1,5 +1,6 @@
 package com.carrefour.desafio.android.githubtools.features.home.ui
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
@@ -11,6 +12,7 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
+import com.carrefour.desafio.android.githubtools.core.navigation.Screen
 import com.carrefour.desafio.android.githubtools.features.home.presentation.HomeEvent
 import com.carrefour.desafio.android.githubtools.features.home.presentation.HomeUiStates
 
@@ -48,5 +50,7 @@ fun HomeLayout(
     onEvent: (HomeEvent) -> Unit
 ) {
 
+    Column(modifier.fillMaxSize().clickable { navController.navigate(Screen.AllUsersList.route) }) {
         Text(text = "HOME SCREEN ")
+    }
 }

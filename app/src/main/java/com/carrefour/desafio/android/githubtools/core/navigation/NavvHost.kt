@@ -11,6 +11,9 @@ import com.carrefour.desafio.android.githubtools.core.utils.util.rememberFlowWit
 import com.carrefour.desafio.android.githubtools.features.home.presentation.HomeUiStates
 import com.carrefour.desafio.android.githubtools.features.home.presentation.HomeViewModel
 import com.carrefour.desafio.android.githubtools.features.home.ui.HomeScreen
+import com.carrefour.desafio.android.githubtools.features.listusers.presentation.ListUsersUiStates
+import com.carrefour.desafio.android.githubtools.features.listusers.presentation.ListUsersViewModel
+import com.carrefour.desafio.android.githubtools.features.listusers.ui.ListUsersScreen
 import com.google.accompanist.navigation.animation.AnimatedNavHost
 import com.google.accompanist.navigation.animation.composable
 import org.koin.androidx.compose.getViewModel
@@ -28,6 +31,7 @@ internal fun AppNavigation(
         modifier = modifier,
     ) {
         navigateToHome(navController, modifier)
+        navigateToAllUsersSccreen(navController, modifier)
     }
 }
 
@@ -44,6 +48,25 @@ fun NavGraphBuilder.navigateToHome(navController: NavHostController, modifier: M
             onEvent = viewModel::onEvent
         )
     }
+}
+
+@OptIn(ExperimentalAnimationApi::class)
+fun NavGraphBuilder.navigateToAllUsersSccreen(
+    navController: NavHostController,
+    modifier: Modifier
+) {
+    composable(route = Screen.AllUsersList.route) {
+        val viewModel: ListUsersViewModel = getViewModel()
+        val uiState by rememberFlowWithLifecycle(viewModel.uiSTate)
+            .collectAsState(initial = ListUsersUiStates.Empty)
+        ListUsersScreen(
+            modifier = modifier,
+            navController = navController,
+            state = uiState,
+            onEvent = viewModel::onEvent
+        )
+    }
+
 }
 
 

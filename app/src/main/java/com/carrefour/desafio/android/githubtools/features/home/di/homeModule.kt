@@ -9,6 +9,8 @@ import retrofit2.Retrofit
 val homeModule = module {
 
     viewModel { HomeViewModel(get()) }
+    single { provideHomeServices(get()) }
+
 
 }
 

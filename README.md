@@ -34,6 +34,12 @@ Dicas
 •
 Faça testes automatizados
 
+
+- acesse https://github.com/settings/personal-access-tokens/new
+- crie um token para acesso simples e copie o mesmo
+- substitua o token no arquivo gradle.properties
+- rode o projeto
+- 
 Thema
 Splash
 gradleDSL

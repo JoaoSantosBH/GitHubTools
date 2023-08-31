@@ -5,8 +5,7 @@ import com.carrefour.desafio.android.githubtools.BuildConfig
 import okhttp3.Interceptor
 import okhttp3.Response
 
-class HttpInterceptor( ) :
-    Interceptor {
+class HttpInterceptor : Interceptor {
 
     private val accessToken get(): String? = BuildConfig.API_TOKEN
 
