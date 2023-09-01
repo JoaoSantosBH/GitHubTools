@@ -6,6 +6,9 @@ object Deps {
     const val RELEASE = "release"
     const val DEBUG = "debug"
 
+    // C O I L
+    const val coilCompose = "io.coil-kt:coil-compose:${Versions.coilComposeVersion}"
+
     //Core Section
     const val androidxActivity = "androidx.activity:activity-compose:${Versions.androidxActivityVersion}"
     const val androidCoreX = "androidx.core:core-ktx:${Versions.androidCoreXVersion}"

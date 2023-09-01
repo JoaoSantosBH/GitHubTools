@@ -64,6 +64,9 @@ buildFeatures.buildConfig = true
 
 dependencies {
 
+    //coil
+    implementation(Deps.coilCompose)
+
     //Core Section
     implementation(Deps.androidxActivity)
     implementation(Deps.androidCoreX)
