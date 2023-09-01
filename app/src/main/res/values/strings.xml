@@ -3,4 +3,6 @@
     <string name="btn_search_txt">Procurar</string>
     <string name="search_field_hint">Procurar usuário</string>
     <string name="btn_list_all_txt">Mostrar todos</string>
+    <string name="repo_list_text">Listar repos</string>
+    <string name="cd_home_logo_text">Logo do Carrefour</string>
 </resources>

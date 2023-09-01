@@ -13,7 +13,6 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
@@ -24,9 +23,6 @@ import com.carrefour.desafio.android.githubtools.R
 import com.carrefour.desafio.android.githubtools.core.components.DefaultToolbar
 import com.carrefour.desafio.android.githubtools.core.components.LoadingLayout
 import com.carrefour.desafio.android.githubtools.core.navigation.Screen
-import com.carrefour.desafio.android.githubtools.features.home.presentation.HomeEvent
-import com.carrefour.desafio.android.githubtools.features.home.presentation.HomeUiStates
-import com.carrefour.desafio.android.githubtools.features.home.ui.ComponentsLayout
 import com.carrefour.desafio.android.githubtools.features.listusers.presentation.ListUsersEvent
 import com.carrefour.desafio.android.githubtools.features.listusers.presentation.ListUsersUiStates
 import com.google.accompanist.navigation.animation.rememberAnimatedNavController
@@ -78,7 +74,7 @@ fun ListUsersLayout(
     LazyColumn {
 
         items(ListUsersUiStates.DUMB_LIST){ cardItem  ->
-            ItemListComponent(item = cardItem)
+            ItemListComponent(item = cardItem,navController)
             Spacer(modifier = Modifier.height(4.dp))
         }
 
