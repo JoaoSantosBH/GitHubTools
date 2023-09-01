@@ -1,5 +1,8 @@
 object Versions {
 
+    // C O I L
+    const val coilComposeVersion = "2.4.0"
+
     //Core Section
     const val androidCoreXVersion = "1.10.1"
     const val androidxLifeCycleVersion = "2.6.1"
