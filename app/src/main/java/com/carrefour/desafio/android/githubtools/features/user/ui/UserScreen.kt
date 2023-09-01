@@ -30,6 +30,7 @@ import androidx.navigation.NavHostController
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
 import com.carrefour.desafio.android.githubtools.R
+import com.carrefour.desafio.android.githubtools.core.components.AnotherToolbarComposable
 import com.carrefour.desafio.android.githubtools.core.components.DefaultToolbar
 import com.carrefour.desafio.android.githubtools.core.components.LoadingLayout
 import com.carrefour.desafio.android.githubtools.core.navigation.Screen
@@ -48,8 +49,7 @@ fun UserScreen(
 
     Scaffold(
         topBar = {
-            DefaultToolbar(title = R.string.app_name, navController = navController) {
-            }
+            AnotherToolbarComposable(navController = navController)
         },
         content = { paddingValues ->
             Column(

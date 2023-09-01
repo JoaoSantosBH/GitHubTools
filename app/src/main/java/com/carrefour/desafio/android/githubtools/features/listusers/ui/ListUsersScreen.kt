@@ -19,7 +19,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
-import com.carrefour.desafio.android.githubtools.R
+import com.carrefour.desafio.android.githubtools.core.components.AnotherToolbarComposable
 import com.carrefour.desafio.android.githubtools.core.components.DefaultToolbar
 import com.carrefour.desafio.android.githubtools.core.components.LoadingLayout
 import com.carrefour.desafio.android.githubtools.core.navigation.Screen
@@ -38,11 +38,9 @@ fun ListUsersScreen(
 
     Scaffold(
         topBar = {
-            DefaultToolbar(title = R.string.app_name, navController = navController ) {
-                
-            }
+            AnotherToolbarComposable(navController = navController)
         },
-        content = {paddingValues ->
+        content = { paddingValues ->
             Column(
                 modifier
                     .fillMaxSize()
@@ -51,8 +49,8 @@ fun ListUsersScreen(
                 if (state.isLoading)
                     LoadingLayout(paddingValues)
                 else
-                    ListUsersLayout(paddingValues,modifier, navController, state, onEvent)
-                
+                    ListUsersLayout(paddingValues, modifier, navController, state, onEvent)
+
             }
         }
     )
@@ -73,13 +71,13 @@ fun ListUsersLayout(
 
     LazyColumn {
 
-        items(ListUsersUiStates.DUMB_LIST){ cardItem  ->
-            ItemListComponent(item = cardItem,navController)
+        items(state.list) { cardItem ->
+            ItemListComponent(item = cardItem, navController)
             Spacer(modifier = Modifier.height(4.dp))
         }
 
     }
-    
+
 }
 
 @OptIn(ExperimentalAnimationApi::class)

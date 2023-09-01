@@ -71,7 +71,7 @@ fun ItemListComponent(item: ListUsersModel, navController: NavHostController) {
                 verticalArrangement = Arrangement.Center
             ) {
                 Text(
-                    text = "ert", style = TextStyle(
+                    text = item.login.toString(), style = TextStyle(
                         fontSize = MaterialTheme.typography.titleLarge.fontSize,
                         color = MaterialTheme.colorScheme.onPrimaryContainer
                     )

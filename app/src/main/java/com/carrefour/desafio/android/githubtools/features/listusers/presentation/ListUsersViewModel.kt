@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.carrefour.desafio.android.githubtools.core.utils.util.RequestHandler
 import com.carrefour.desafio.android.githubtools.core.utils.util.then
+import com.carrefour.desafio.android.githubtools.core.utils.util.update
 import com.carrefour.desafio.android.githubtools.features.listusers.data.remote.mapper.toDomain
 import com.carrefour.desafio.android.githubtools.features.listusers.services.ListUsersServices
 import kotlinx.coroutines.flow.MutableSharedFlow
@@ -43,12 +44,19 @@ class ListUsersViewModel(private val services: ListUsersServices) : ViewModel() 
 
     private fun fetchListUsersData() {
         viewModelScope.launch {
+            _uiState.update { it.copy(isLoading = true) }
             RequestHandler.doRequest { services.fetchListUsersData() }.then(
-                onSuccess = {
-                    it.toDomain()
+                onSuccess = { result ->
+                    _uiState.update { it.copy(list = result.toDomain()) }
                 },
-                onError = {},
-                onFinish = {}
+                onError = {
+                    _uiState.update { it.copy(isLoading = false) }
+
+                },
+                onFinish = {
+                    _uiState.update { it.copy(isLoading = false) }
+
+                }
             )
         }
     }
