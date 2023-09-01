@@ -14,7 +14,7 @@
 - SplashScreen
 -
 
-![Home](img/home.png)![List](img/list.png)![User](img/user.png)  
+![Home](img/home.png)  ![List](img/list.png)  ![User](img/user.png)  
 Instruçoes:
 - acesse https://github.com/settings/personal-access-tokens/new
 - crie um token para acesso simples e copie o mesmo
