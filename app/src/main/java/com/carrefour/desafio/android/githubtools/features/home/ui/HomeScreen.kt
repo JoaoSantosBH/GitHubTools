@@ -1,20 +1,39 @@
 package com.carrefour.desafio.android.githubtools.features.home.ui
 
+import androidx.compose.animation.ExperimentalAnimationApi
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
-import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
+import com.carrefour.desafio.android.githubtools.R
+import com.carrefour.desafio.android.githubtools.core.components.DefaultAppButton
+import com.carrefour.desafio.android.githubtools.core.components.DefaultToolbar
+import com.carrefour.desafio.android.githubtools.core.components.LoadingLayout
+import com.carrefour.desafio.android.githubtools.core.components.SearchTextFieldComponent
 import com.carrefour.desafio.android.githubtools.core.navigation.Screen
 import com.carrefour.desafio.android.githubtools.features.home.presentation.HomeEvent
 import com.carrefour.desafio.android.githubtools.features.home.presentation.HomeUiStates
+import com.google.accompanist.navigation.animation.rememberAnimatedNavController
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -23,19 +42,25 @@ fun HomeScreen(
     navController: NavHostController,
     state: HomeUiStates,
     onEvent: (HomeEvent) -> Unit,
-    ){
+) {
 
     Scaffold(
         topBar = {
+            DefaultToolbar(title = R.string.app_name, navController = navController) {
 
+            }
         },
         content = {
-            Column(modifier.fillMaxSize()) {
+            Column(
+                modifier
+                    .fillMaxSize()
+                    .padding(horizontal = 16.dp)
+            ) {
                 HomeLayout(it, modifier, navController, state, onEvent)
             }
         }
     )
-    LaunchedEffect(Unit){
+    LaunchedEffect(Unit) {
         onEvent(HomeEvent.FetchHomeData)
     }
 
@@ -49,8 +74,63 @@ fun HomeLayout(
     state: HomeUiStates,
     onEvent: (HomeEvent) -> Unit
 ) {
-
-    Column(modifier.fillMaxSize().clickable { navController.navigate(Screen.AllUsersList.route) }) {
+    Column(
+        modifier
+            .fillMaxSize()
+            .background(color = MaterialTheme.colorScheme.background)
+            .clickable { navController.navigate(Screen.AllUsersList.route) }) {
         Text(text = "HOME SCREEN ")
+        if (state.isLoading)
+            LoadingLayout(paddingValues)
+        else
+            ComponentsLayout(modifier, navController, state, onEvent)
+
+
     }
+}
+
+@Composable
+fun ComponentsLayout(
+    modifier: Modifier,
+    navController: NavHostController,
+    state: HomeUiStates,
+    onEvent: (HomeEvent) -> Unit
+) {
+
+    LazyColumn {
+        item {
+            Spacer(modifier.height(62.dp))
+            Row(modifier.fillMaxWidth(), horizontalArrangement = Arrangement.Center) {
+                Image(
+                    painter = painterResource(id = R.drawable.ic_logo),
+                    contentDescription = "Logo form Githib"
+                )
+            }
+        }
+        item {
+            Spacer(modifier.height(16.dp))
+            SearchTextFieldComponent(modifier, onEvent, state)
+        }
+        item {
+            Spacer(modifier.height(16.dp))
+            DefaultAppButton(state, R.string.btn_search_txt, "SearchButtonTag")
+        }
+        item {
+            Spacer(modifier.height(16.dp))
+            DefaultAppButton(state, R.string.btn_list_all_txt, "ListAllButtonTag")
+        }
+
+    }
+
+}
+
+@OptIn(ExperimentalAnimationApi::class)
+@Preview(showBackground = true)
+@Composable
+fun ComponentsPreview() {
+    val modifier = Modifier
+    val navController = rememberAnimatedNavController()
+    val state = HomeUiStates.Empty
+    val onEvent: (HomeEvent) -> Unit = {}
+    ComponentsLayout(modifier, navController, state, onEvent)
 }

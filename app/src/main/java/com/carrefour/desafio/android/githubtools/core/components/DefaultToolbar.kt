@@ -12,6 +12,7 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
+import androidx.compose.material3.TopAppBarColors
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -20,6 +21,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.Color.Companion.Yellow
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
@@ -29,6 +31,7 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import com.carrefour.desafio.android.githubtools.R
 import com.carrefour.desafio.android.githubtools.core.navigation.Screen
+import com.carrefour.desafio.android.githubtools.ui.theme.md_theme_dark_onPrimaryContainer
 import com.google.accompanist.navigation.animation.rememberAnimatedNavController
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -47,11 +50,11 @@ fun DefaultToolbar(
                 stringResource(id = title),
                 maxLines = 1,
                 style = TextStyle(fontSize = 22.sp),
-                color = Color.White,
+                color = MaterialTheme.colorScheme.onBackground,
                 overflow = TextOverflow.Ellipsis
             )
         },
-
+        colors  = TopAppBarDefaults.smallTopAppBarColors(containerColor = MaterialTheme.colorScheme.primaryContainer),
         actions = {
             IconButton(onClick = {
                 showMenu = true
@@ -91,7 +94,6 @@ fun DefaultToolbar(
             }
 
         },
-        colors = TopAppBarDefaults.smallTopAppBarColors(containerColor = MaterialTheme.colorScheme.background)
     )
 }
 
@@ -109,7 +111,7 @@ fun PreviewToolbar() {
 }
 
 @OptIn(ExperimentalAnimationApi::class)
-@Preview(showBackground = true)
+@Preview(showBackground = true, backgroundColor = 0xFF64FFDA)
 @Composable
 fun PreviewToolbarWithSecondIcon() {
     val navController = rememberAnimatedNavController()
