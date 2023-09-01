@@ -1,4 +1,4 @@
-package com.carrefour.desafio.android.githubtools.core.components
+package com.carrefour.desafio.android.githubtools.features.user.ui
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -15,10 +15,10 @@ import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.carrefour.desafio.android.githubtools.features.home.presentation.HomeUiStates
-
+import com.carrefour.desafio.android.githubtools.features.user.presntation.UserUiStates
 
 @Composable
-fun DefaultAppButton(state: HomeUiStates, btnText: Int, testTag: String) {
+fun UserButtonComponent(state: UserUiStates, btnText: Int, testTag: String) {
     Column(
         modifier = Modifier
             .fillMaxWidth()
