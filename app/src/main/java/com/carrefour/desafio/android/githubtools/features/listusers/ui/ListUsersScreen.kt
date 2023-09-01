@@ -1,5 +1,6 @@
 package com.carrefour.desafio.android.githubtools.features.listusers.ui
 
+import android.util.Log
 import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -14,8 +15,13 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.SnackbarHostState
+import androidx.compose.material3.SnackbarResult
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.SideEffect
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -27,6 +33,7 @@ import com.carrefour.desafio.android.githubtools.core.navigation.Screen
 import com.carrefour.desafio.android.githubtools.features.listusers.presentation.ListUsersEvent
 import com.carrefour.desafio.android.githubtools.features.listusers.presentation.ListUsersUiStates
 import com.google.accompanist.navigation.animation.rememberAnimatedNavController
+import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -36,6 +43,8 @@ fun ListUsersScreen(
     state: ListUsersUiStates,
     onEvent: (ListUsersEvent) -> Unit,
 ) {
+    val scaffoldState = remember { SnackbarHostState() }
+    val coroutineScope = rememberCoroutineScope()
 
     Scaffold(
         topBar = {
@@ -57,6 +66,16 @@ fun ListUsersScreen(
     )
     LaunchedEffect(Unit) {
         onEvent(ListUsersEvent.FetchListUsersDataEvent)
+        if (state.isError) {
+            coroutineScope.launch {
+                scaffoldState.showSnackbar(
+                    message = state.errorMessage,
+                )
+            }
+        }
+    }
+    SideEffect() {
+
     }
 
 }

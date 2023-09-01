@@ -4,7 +4,9 @@ import com.carrefour.desafio.android.githubtools.features.listusers.domain.ListU
 
 data class ListUsersUiStates(
     val isLoading: Boolean = false,
-    val list: List<ListUsersModel> = emptyList()
+    val list: List<ListUsersModel> = emptyList(),
+    val isError: Boolean = false,
+    val errorMessage:String = ""
 ) {
     companion object {
         val Empty = ListUsersUiStates()

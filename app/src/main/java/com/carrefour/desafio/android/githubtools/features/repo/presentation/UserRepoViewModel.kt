@@ -46,9 +46,8 @@ class UserRepoViewModel(
         viewModelScope.launch {
             RequestHandler.doRequest { services.fetchUserReposData(uiState.value.userLogin, 1) }
                 .then(
-                    onSuccess = {
-                        val result = it.toDomain()
-                        _uiState.update { it.copy(repoList = result) }
+                    onSuccess = { result ->
+                        _uiState.update { it.copy(repoList = result.toDomain()) }
                     },
                     onError = {
                         _uiState.update { it.copy(isLoading = false) }

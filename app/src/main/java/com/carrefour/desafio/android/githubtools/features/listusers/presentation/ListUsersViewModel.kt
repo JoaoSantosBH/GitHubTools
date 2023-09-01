@@ -36,10 +36,15 @@ class ListUsersViewModel(private val services: ListUsersServices) : ViewModel() 
                 when (event) {
                     ListUsersEvent.OnClickUserEvent -> {}
                     ListUsersEvent.FetchListUsersDataEvent -> fetchListUsersData()
+                    is ListUsersEvent.OnErrorEvent -> setError(event.msg)
                     else -> {}
                 }
             }
         }
+    }
+
+    private fun setError(msg: String) {
+        _uiState.update { it.copy(errorMessage = msg) }
     }
 
     private fun fetchListUsersData() {
@@ -49,8 +54,8 @@ class ListUsersViewModel(private val services: ListUsersServices) : ViewModel() 
                 onSuccess = { result ->
                     _uiState.update { it.copy(list = result.toDomain()) }
                 },
-                onError = {
-                    _uiState.update { it.copy(isLoading = false) }
+                onError = {error ->
+                    _uiState.update { it.copy(isLoading = false, isError = true , errorMessage = error) }
 
                 },
                 onFinish = {
