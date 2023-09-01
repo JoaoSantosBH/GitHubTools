@@ -29,6 +29,7 @@ import coil.compose.AsyncImage
 import coil.request.ImageRequest
 import com.carrefour.desafio.android.githubtools.R
 import com.carrefour.desafio.android.githubtools.core.navigation.Screen
+import com.carrefour.desafio.android.githubtools.core.utils.util.USER_LOGIN_ARGS
 import com.carrefour.desafio.android.githubtools.features.listusers.domain.ListUsersModel
 
 @Composable
@@ -38,7 +39,7 @@ fun ItemListComponent(item: ListUsersModel, navController: NavHostController) {
             .fillMaxWidth()
             .height(80.dp)
             .padding(horizontal = 16.dp)
-            .clickable { navController.navigate(Screen.UserScreen.route) }
+            .clickable { navController.navigate(Screen.UserScreen.route + "/${item.login}") }
     ) {
         Row(
             modifier = Modifier
