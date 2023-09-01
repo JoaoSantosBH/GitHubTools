@@ -42,8 +42,11 @@ fun SearchTextFieldComponent(
     ) {
 
         OutlinedTextField(
-            value = text,
-            onValueChange = { text = it},
+            value = state.searchText,
+            onValueChange = {
+                text = it
+                onEvent(HomeEvent.UpdateSearchField(it))
+                            },
             modifier.fillMaxWidth(),
             singleLine = true,
             trailingIcon =

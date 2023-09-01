@@ -5,11 +5,13 @@ import androidx.lifecycle.viewModelScope
 import com.carrefour.desafio.android.githubtools.core.utils.util.RequestHandler
 import com.carrefour.desafio.android.githubtools.core.utils.util.then
 import com.carrefour.desafio.android.githubtools.features.user.data.remote.mapper.toDomain
+import com.carrefour.desafio.android.githubtools.features.user.domain.UserModel
 import com.carrefour.desafio.android.githubtools.features.user.services.UserServices
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
 class UserViewModel(private val services: UserServices) : ViewModel() {
@@ -32,23 +34,42 @@ class UserViewModel(private val services: UserServices) : ViewModel() {
         viewModelScope.launch {
             pendingActions.collect { event ->
                 when (event) {
-                    UserEvents.FetchUserData -> {  fetchUserData("mojombo")}
+                    UserEvents.FetchUserData -> {  fetchUserData() }
                     else -> {}
                 }
-
             }
         }
     }
 
-    private fun fetchUserData(login: String) {
+    private fun fetchUserData() {
         viewModelScope.launch {
-            RequestHandler.doRequest { services.fetchUserData(login) }.then(
+            starLoading()
+            RequestHandler.doRequest { services.fetchUserData(uiState.value.userLogin) }.then(
                 onSuccess = {
-                    it.toDomain()
+                    updateUser(it.toDomain())
                 },
                 onError = {},
-                onFinish = {}
+                onFinish = {
+                    finishLoading()
+                }
             )
         }
+    }
+
+    private fun updateUser(result: UserModel) {
+        val bio = result.bio ?: "Sem descrição"
+        val newResult = result.copy(bio = bio)
+        _uiState.update { it.copy(user = newResult) }
+    }
+
+    fun finishLoading() {
+        _uiState.update { it.copy(isLoading = false) }
+    }
+
+    fun starLoading() {
+        _uiState.update { it.copy(isLoading = true) }
+    }
+    fun setUserLogin(login: String) {
+        _uiState.update { it.copy(userLogin = login) }
     }
 }

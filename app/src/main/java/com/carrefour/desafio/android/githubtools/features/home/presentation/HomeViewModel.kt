@@ -10,6 +10,7 @@ import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
 class HomeViewModel(
@@ -33,12 +34,17 @@ class HomeViewModel(
         viewModelScope.launch {
             pendingActions.collect { event ->
                 when (event) {
+                    is HomeEvent.UpdateSearchField -> updateSearchField(event.text)
                     HomeEvent.DismissDialog -> dismissErrorMessage()
                     HomeEvent.FetchHomeData -> fetchHome()
                     else -> {}
                 }
             }
         }
+    }
+
+    private fun updateSearchField(text: String) {
+        _uiState.update { it.copy(searchText = text) }
     }
 
     fun fetchHome(){

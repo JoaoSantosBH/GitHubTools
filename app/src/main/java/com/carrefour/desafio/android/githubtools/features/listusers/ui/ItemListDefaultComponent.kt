@@ -27,6 +27,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
+import com.carrefour.desafio.android.githubtools.R
 import com.carrefour.desafio.android.githubtools.core.navigation.Screen
 import com.carrefour.desafio.android.githubtools.features.listusers.domain.ListUsersModel
 
@@ -57,7 +58,7 @@ fun ItemListComponent(item: ListUsersModel, navController: NavHostController) {
                         .data(item.avatarUrl)
                         .crossfade(true)
                         .build(),
-                    placeholder = painterResource(android.R.drawable.ic_menu_upload),
+                    placeholder = painterResource(R.drawable.ic_logo),
                     error = painterResource(android.R.drawable.ic_delete),
                     contentDescription = item.login
                 )

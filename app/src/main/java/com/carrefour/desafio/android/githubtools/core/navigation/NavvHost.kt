@@ -7,6 +7,10 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
+import androidx.navigation.NavType
+import androidx.navigation.navArgument
+import com.carrefour.desafio.android.githubtools.core.utils.util.USER_LOGIN
+import com.carrefour.desafio.android.githubtools.core.utils.util.USER_LOGIN_ARGS
 import com.carrefour.desafio.android.githubtools.core.utils.util.rememberFlowWithLifecycle
 import com.carrefour.desafio.android.githubtools.features.home.presentation.HomeUiStates
 import com.carrefour.desafio.android.githubtools.features.home.presentation.HomeViewModel
@@ -83,8 +87,12 @@ fun NavGraphBuilder.navigateToUser(
     navController: NavHostController,
     modifier: Modifier
 ) {
-    composable(route = Screen.UserScreen.route) {
+    composable(
+        route = Screen.UserScreen.route + USER_LOGIN_ARGS,
+        arguments = listOf(navArgument(USER_LOGIN) {type = NavType.StringType }  )) { backStackEntry ->
+
         val viewModel: UserViewModel = getViewModel()
+        viewModel.setUserLogin(backStackEntry.arguments?.getString(USER_LOGIN).toString())
         val uiState by rememberFlowWithLifecycle(viewModel.uiState)
             .collectAsState(initial = UserUiStates.Empty)
         UserScreen(

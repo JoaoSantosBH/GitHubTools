@@ -56,8 +56,8 @@ fun HomeSearchButton(navController: NavHostController, state: HomeUiStates, btnT
             .padding(horizontal = 24.dp)
     ) {
         Button(
-            onClick = { navController.navigate(Screen.AllUsersList.route)},
-            enabled = state.isLoading,
+            onClick = { navController.navigate(Screen.UserScreen.route + "/${state.searchText}")},
+            enabled = state.searchText.isNotEmpty(),
             shape = RoundedCornerShape(50.dp),
             colors = ButtonDefaults.buttonColors(
                 containerColor = MaterialTheme.colorScheme.tertiaryContainer,

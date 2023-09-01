@@ -93,7 +93,7 @@ fun ComponentsLayout(
 
     LazyColumn {
         item {
-            Spacer(modifier.height(62.dp))
+            Spacer(modifier.height(142.dp))
             Row(modifier.fillMaxWidth(), horizontalArrangement = Arrangement.Center) {
                 Image(
                     painter = painterResource(id = R.drawable.ic_logo),
@@ -102,7 +102,7 @@ fun ComponentsLayout(
             }
         }
         item {
-            Spacer(modifier.height(16.dp))
+            Spacer(modifier.height(80.dp))
             SearchTextFieldComponent(modifier, onEvent, state)
         }
         item {

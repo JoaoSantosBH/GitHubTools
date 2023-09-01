@@ -88,7 +88,7 @@ fun UserLayout(
                     .clip(RoundedCornerShape(10.dp)),
                 contentScale = ContentScale.Crop,
                 model = ImageRequest.Builder(LocalContext.current)
-                    .data("https://avatars.githubusercontent.com/u/1?v=4")
+                    .data(state.user.avatarUrl)
                     .crossfade(true)
                     .build(),
                 placeholder = painterResource(R.drawable.ic_logo),
@@ -100,7 +100,7 @@ fun UserLayout(
 
         item {
             Row(modifier.fillMaxWidth()) {
-                Text(text = "qwerqwerqwerqwerqwerqwerqwerqwer\nqwerqwerqwerqwerqwerqwerqer")
+                Text(text = state.user.bio.toString())
             }
             Spacer(modifier.height(80.dp))
         }
