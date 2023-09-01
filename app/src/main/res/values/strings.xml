@@ -1,3 +1,6 @@
 <resources>
     <string name="app_name">GitHubTools</string>
+    <string name="btn_search_txt">Procurar</string>
+    <string name="search_field_hint">Procurar usuário</string>
+    <string name="btn_list_all_txt">Mostrar todos</string>
 </resources>
