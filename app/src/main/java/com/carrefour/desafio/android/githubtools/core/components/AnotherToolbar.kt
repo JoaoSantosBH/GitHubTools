@@ -7,6 +7,10 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.width
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material.icons.filled.Home
+import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -21,6 +25,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import com.carrefour.desafio.android.githubtools.R
@@ -31,18 +36,20 @@ import com.carrefour.desafio.android.githubtools.R
 fun AnotherToolbarComposable(
     navController: NavHostController,
 ) {
-
-    TopAppBar( modifier = Modifier
-        .height(88.dp)
+    TopAppBar(modifier = Modifier
         .fillMaxWidth(),
-        title = { Text(text = stringResource(id = R.string.app_name)) },
+        title = {
+            Text(
+                text = stringResource(id = R.string.app_name), maxLines = 1,
+                overflow = TextOverflow.Ellipsis
+            )
+        },
         navigationIcon = {
             IconButton(
-                onClick = { navController.popBackStack() } ,
-                enabled = true,
+                onClick = { navController.popBackStack() }
             ) {
                 Icon(
-                    painter = painterResource(id = android.R.drawable.ic_delete),
+                    imageVector = Icons.Filled.ArrowBack,
                     contentDescription = ""
                 )
             }
