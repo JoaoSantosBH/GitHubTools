@@ -70,6 +70,8 @@ fun ListUsersLayout(
     onEvent: (ListUsersEvent) -> Unit
 ) {
 
+    Spacer(modifier.height(8.dp))
+
     LazyColumn(modifier.padding(paddingValues)) {
 
         items(state.list) { cardItem ->

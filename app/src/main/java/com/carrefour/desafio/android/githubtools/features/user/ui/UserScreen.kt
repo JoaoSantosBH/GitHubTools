@@ -31,7 +31,6 @@ import coil.compose.AsyncImage
 import coil.request.ImageRequest
 import com.carrefour.desafio.android.githubtools.R
 import com.carrefour.desafio.android.githubtools.core.components.AnotherToolbarComposable
-import com.carrefour.desafio.android.githubtools.core.components.DefaultToolbar
 import com.carrefour.desafio.android.githubtools.core.components.LoadingLayout
 import com.carrefour.desafio.android.githubtools.core.navigation.Screen
 import com.carrefour.desafio.android.githubtools.features.user.presntation.UserEvents
@@ -79,7 +78,7 @@ fun UserLayout(
     onEvent: (UserEvents) -> Unit
 ) {
 
-    Spacer(modifier.height(72.dp))
+    Spacer(modifier.height(102.dp))
     LazyColumn(modifier.padding(horizontal = 16.dp)) {
         item {
             AsyncImage(
@@ -93,7 +92,7 @@ fun UserLayout(
                     .build(),
                 placeholder = painterResource(R.drawable.ic_logo),
                 error = painterResource(R.drawable.ic_logo),
-                contentDescription = "Mocked"
+                contentDescription = state.user.login
             )
             Spacer(modifier.height(16.dp))
         }
@@ -106,7 +105,7 @@ fun UserLayout(
         }
 
         item {
-            UserButtonComponent(state = state, btnText = R.string.repo_list_text, testTag = "UserBtnText")
+            UserButtonComponent(state = state, btnText = R.string.repo_list_text, testTag = "UserBtnText", navController)
         }
     }
 

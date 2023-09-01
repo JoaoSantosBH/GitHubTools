@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.carrefour.desafio.android.githubtools.core.utils.util.RequestHandler
 import com.carrefour.desafio.android.githubtools.core.utils.util.then
+import com.carrefour.desafio.android.githubtools.core.utils.util.update
 import com.carrefour.desafio.android.githubtools.features.repo.data.remote.mapper.toDomain
 import com.carrefour.desafio.android.githubtools.features.repo.services.RepoService
 import kotlinx.coroutines.flow.MutableSharedFlow
@@ -16,7 +17,7 @@ class UserRepoViewModel(
     private val services: RepoService
 ) : ViewModel() {
 
-    private val _uiState : MutableStateFlow<RepoUiState> = MutableStateFlow(RepoUiState.Empty)
+    private val _uiState: MutableStateFlow<RepoUiState> = MutableStateFlow(RepoUiState.Empty)
     var uiState: StateFlow<RepoUiState> = _uiState.asStateFlow()
     private val pendingActions = MutableSharedFlow<ReposEvents>()
 
@@ -26,30 +27,39 @@ class UserRepoViewModel(
 
     private fun handleEvents() {
         viewModelScope.launch {
-            pendingActions.collect{event ->
-                when(event){
+            pendingActions.collect { event ->
+                when (event) {
                     ReposEvents.FetchUserReposEvent -> fetchUserRepos()
                 }
             }
         }
     }
 
-    fun onEvent(event:ReposEvents){
+    fun onEvent(event: ReposEvents) {
         viewModelScope.launch {
             pendingActions.emit(event)
         }
     }
 
     private fun fetchUserRepos() {
+        _uiState.update { it.copy(isLoading = true) }
         viewModelScope.launch {
-            RequestHandler.doRequest { services.fetchUserReposData("mojombo",1) }.then(
-                onSuccess = {
-                            it.toDomain()
-                },
-                onError = {},
-                onFinish = {}
-            )
+            RequestHandler.doRequest { services.fetchUserReposData(uiState.value.userLogin, 1) }
+                .then(
+                    onSuccess = {
+                        val result = it.toDomain()
+                        _uiState.update { it.copy(repoList = result) }
+                    },
+                    onError = {
+                        _uiState.update { it.copy(isLoading = false) }
+                    },
+                    onFinish = { _uiState.update { it.copy(isLoading = false) } }
+                )
         }
+    }
+
+    fun setUserLogin(login: String) {
+        _uiState.update { it.copy(userLogin = login) }
     }
 
 }

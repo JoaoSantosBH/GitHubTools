@@ -14,19 +14,25 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import com.carrefour.desafio.android.githubtools.features.home.presentation.HomeUiStates
+import androidx.navigation.NavHostController
+import com.carrefour.desafio.android.githubtools.core.navigation.Screen
 import com.carrefour.desafio.android.githubtools.features.user.presntation.UserUiStates
 
 @Composable
-fun UserButtonComponent(state: UserUiStates, btnText: Int, testTag: String) {
+fun UserButtonComponent(
+    state: UserUiStates,
+    btnText: Int,
+    testTag: String,
+    navController: NavHostController
+) {
     Column(
         modifier = Modifier
             .fillMaxWidth()
             .padding(horizontal = 24.dp)
     ) {
         Button(
-            onClick = { },
-            enabled = state.isLoading,
+            onClick = { navController.navigate(Screen.UserReposScreen.route + "/${state.userLogin}") },
+            enabled = state.isLoading.not(),
             shape = RoundedCornerShape(50.dp),
             colors = ButtonDefaults.buttonColors(
                 containerColor = MaterialTheme.colorScheme.tertiaryContainer,

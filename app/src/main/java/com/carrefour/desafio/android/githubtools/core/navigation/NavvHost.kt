@@ -108,8 +108,12 @@ fun NavGraphBuilder.navigateToUserRepos(
     navController: NavHostController,
     modifier: Modifier
 ) {
-    composable(route = Screen.UserReposScreen.route){
-            val viewModel: UserRepoViewModel = getViewModel()
+    composable(
+        route = Screen.UserReposScreen.route + USER_LOGIN_ARGS,
+        arguments = listOf(navArgument(USER_LOGIN) { type = NavType.StringType })) { backStackEntry ->
+
+        val viewModel: UserRepoViewModel = getViewModel()
+        viewModel.setUserLogin(backStackEntry.arguments?.getString(USER_LOGIN).toString())
         val uiState by rememberFlowWithLifecycle(viewModel.uiState)
             .collectAsState(initial = RepoUiState.Empty)
         ReposScreen(modifier = modifier, navController = navController, state = uiState, onEvent = viewModel::onEvent )

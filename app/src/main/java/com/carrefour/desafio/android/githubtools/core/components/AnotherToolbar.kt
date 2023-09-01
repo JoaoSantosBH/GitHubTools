@@ -18,15 +18,18 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.ProvideTextStyle
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
+import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import com.carrefour.desafio.android.githubtools.R
 
@@ -40,10 +43,14 @@ fun AnotherToolbarComposable(
         .fillMaxWidth(),
         title = {
             Text(
-                text = stringResource(id = R.string.app_name), maxLines = 1,
+                text = stringResource(id = R.string.app_name),
+                maxLines = 1,
+                style = TextStyle(fontSize = 22.sp),
+                color = MaterialTheme.colorScheme.onBackground,
                 overflow = TextOverflow.Ellipsis
             )
         },
+        colors  = TopAppBarDefaults.smallTopAppBarColors(containerColor = MaterialTheme.colorScheme.primaryContainer),
         navigationIcon = {
             IconButton(
                 onClick = { navController.popBackStack() }
